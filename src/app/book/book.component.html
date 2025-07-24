@@ -1,0 +1,61 @@
+<div>
+  <!-- Form to add a new book -->
+  <h2>Add a New Book</h2>
+
+  <form>
+    <!-- Title input -->
+    <div style="margin-bottom: 16px;">
+      <label for="title" style="display: inline-block; width: 80px;">Title:</label>
+      <input id="title" type="text" [(ngModel)]="title" name="title" />
+    </div>
+
+    <!-- Author input -->
+    <div style="margin-bottom: 16px;">
+      <label for="author" style="display: inline-block; width: 80px;">Author:</label>
+      <input id="author" type="text" [(ngModel)]="author" name="author" />
+    </div>
+
+    <!-- Add Book button -->
+    <button
+      type="button"
+      (click)="addBook()"
+      style="background-color: green; color: white; padding: 6px 12px; border: none; cursor: pointer;"
+    >
+      Add Book
+    </button>
+  </form>
+
+  <!-- Book list section -->
+  <div *ngIf="books.length > 0; else noBooks" style="margin-top: 32px;">
+    <h3>Book List</h3>
+    <table border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>
+            <!-- Delete button -->
+            <button
+              (click)="deleteBook(book.id)"
+              style="background-color: red; color: white; padding: 4px 10px; border: none; cursor: pointer;"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Message if no books exist -->
+  <ng-template #noBooks>
+    <p>No books added yet.</p>
+  </ng-template>
+</div>
